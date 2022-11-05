@@ -22,7 +22,6 @@ always_ff @(posedge clk, posedge rst, posedge trigger) begin
             current <= current;
     end
     else current <= S0;
-    $display(dout);
     
 end
 
