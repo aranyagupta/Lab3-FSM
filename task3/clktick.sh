@@ -1,5 +1,5 @@
 #!/bin/sh
-
+# clock ticks once a second when vbdValue set to 27
 # cleanup
 rm -rf obj_dir
 rm -f *.vcd
