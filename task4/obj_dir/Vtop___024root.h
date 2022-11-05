@@ -16,6 +16,7 @@ class Vtop___024root final : public VerilatedModule {
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
     VL_IN8(trigger,0,0);
+    VL_IN8(countDownSpeed,7,0);
     VL_OUT8(dout,7,0);
     VL_OUT8(cmd_seq,0,0);
     VL_OUT8(cmd_delay,0,0);
@@ -23,17 +24,19 @@ class Vtop___024root final : public VerilatedModule {
     VL_OUT8(time_out_0,0,0);
     VL_OUT8(time_out_1,0,0);
     CData/*6:0*/ top__DOT____Vcellout__myLFSR__data_out;
+    CData/*0:0*/ top__DOT____Vcellinp__myF1FSM__en;
     CData/*6:0*/ top__DOT__myLFSR__DOT__sreg;
     CData/*7:0*/ top__DOT__myDelay__DOT__count;
+    CData/*0:0*/ top__DOT__myF1FSM__DOT__triggerFlag;
     CData/*0:0*/ __Vclklast__TOP__clk;
     CData/*0:0*/ __Vclklast__TOP__rst;
     CData/*0:0*/ __Vclklast__TOP__trigger;
     SData/*15:0*/ top__DOT__myClktick__DOT__count;
-    SData/*15:0*/ __Vdly__top__DOT__myClktick__DOT__count;
     IData/*31:0*/ top__DOT__myDelay__DOT__current_state;
     IData/*31:0*/ top__DOT__myDelay__DOT__next_state;
     IData/*31:0*/ top__DOT__myF1FSM__DOT__current;
     IData/*31:0*/ top__DOT__myF1FSM__DOT__next;
+    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;

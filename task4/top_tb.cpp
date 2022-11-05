@@ -23,7 +23,7 @@ int main(int argc, char **argv, char **env) {
   // init Vbuddy
   if (vbdOpen()!=1) return(-1);
   vbdHeader("L3T4:F1LIGHT");
-  vbdSetMode(0);        // Flag mode set to one-shot
+  vbdSetMode(0);        
 
   // initialize simulation inputs
   top->clk = 1;
@@ -39,10 +39,6 @@ int main(int argc, char **argv, char **env) {
       top->eval ();
     }
 
-    // Display toggle neopixel
-    
-    // vbdHex(2, (int(top->dout)>>4) & 0xF);
-    // vbdHex(1, top->dout & 0xF);
     vbdBar(top->dout & 0xFF);
     if (top->dout != 0){
       time_flag = true;
@@ -67,6 +63,7 @@ int main(int argc, char **argv, char **env) {
     // set up input signals of testbench
     top->rst = (simcyc < 2);    // assert reset for 1st cycle
     top->trigger = vbdFlag();
+    top->countDownSpeed = vbdValue();
     vbdCycle(simcyc);
 
     if (Verilated::gotFinish())  exit(0);

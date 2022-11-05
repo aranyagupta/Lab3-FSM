@@ -2,6 +2,7 @@ module top(
     input logic clk,
     input logic rst, 
     input logic trigger,
+    input logic [7:0] countDownSpeed,
     output logic [7:0] dout,
     output logic cmd_seq,
     output logic cmd_delay,
@@ -29,7 +30,7 @@ clktick myClktick(
     .clk(clk),
     .rst(rst),
     .en(cmd_seq),
-    .N({11'b0, 5'd27}),
+    .N(countDownSpeed),
     .tick(time_out_1)
 );
 

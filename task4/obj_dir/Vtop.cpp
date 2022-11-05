@@ -14,6 +14,7 @@ Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
     , trigger{vlSymsp->TOP.trigger}
+    , countDownSpeed{vlSymsp->TOP.countDownSpeed}
     , dout{vlSymsp->TOP.dout}
     , cmd_seq{vlSymsp->TOP.cmd_seq}
     , cmd_delay{vlSymsp->TOP.cmd_delay}

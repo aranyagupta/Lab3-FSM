@@ -11,15 +11,37 @@ module f1_fsm(
 // states
 typedef enum  {S0, S1, S2, S3, S4, S5, S6, S7, S8 } states;
 states current, next;
-
+logic triggerFlag = 1'b0;
 // register logic
 always_ff @(posedge clk, posedge rst, posedge trigger) begin 
     if (rst) current <= S0;
-    else if (trigger || current!=S0) begin
+    else if (!trigger && current!=S0 && triggerFlag) begin
         if (en)
             current <= next;
         else
             current <= current;
+    end
+    else if (!trigger && current==S0 && !triggerFlag) begin
+        current <= current;
+    end
+    else if (!trigger && current==S0 && triggerFlag) begin
+        current <= current;
+        triggerFlag=1'b0;
+        cmd_seq = 1'b1;
+    end
+    else if (trigger && current!=S0 && triggerFlag) begin
+        if (en)
+            current <= next;
+        else
+            current <= current;
+    end
+    else if (trigger && current==S0 && !triggerFlag) begin
+        current <= next;
+        triggerFlag = 1'b1;
+        cmd_seq = 1'b1;
+    end
+    else if (trigger && current==S0 && triggerFlag) begin
+        current <= current;
     end
     else current <= S0;
     
@@ -53,10 +75,10 @@ always_comb begin
         default: dout = {8'b0};
     endcase
 
-    case (current)
-        S8: cmd_seq = 1'b0;
-        default: cmd_seq = 1'b1;
-    endcase
+    // case (current)
+    //     S8: cmd_seq = 1'b0;
+    //     default: cmd_seq = 1'b1;
+    // endcase
 
     case (current)
         S8: cmd_delay = 1'b1;
